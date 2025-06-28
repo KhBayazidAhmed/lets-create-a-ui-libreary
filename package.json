@@ -1,0 +1,28 @@
+{
+    "name": "demo-ui-workspace",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "packages/*",
+        "apps/*"
+    ],
+    "scripts": {
+        "build": "bun run build:library && bun run build:showcase",
+        "build:library": "cd packages/ui-library && bun run build",
+        "build:showcase": "cd packages/ui-showcase && bun run build",
+        "dev": "bun run dev:library & bun run dev:showcase",
+        "dev:library": "cd packages/ui-library && bun run dev",
+        "dev:showcase": "cd packages/ui-showcase && bun run dev",
+        "docker:build": "docker-compose build",
+        "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
+        "docker:dev:detached": "docker-compose -f docker-compose.dev.yml up --build -d",
+        "docker:prod": "docker-compose up --build ui-showcase",
+        "docker:prod:detached": "docker-compose up --build -d ui-showcase",
+        "docker:stop": "docker-compose down",
+        "docker:clean": "docker-compose down -v --rmi all",
+        "docker:validate": "./scripts/validate-docker.sh"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0"
+    }
+}
