@@ -5,7 +5,7 @@ A complete demonstration of a reusable UI component system built with modern web
 ## 📋 Project Structure
 
 ```
-lets-create-a-ui-libreary/
+lets-create-a-ui-library/
 ├── packages/
 │   ├── ui-library/          # Core UI Components Library
 │   ├── ui-showcase/         # Documentation & Demo Website
@@ -60,8 +60,8 @@ lets-create-a-ui-libreary/
 
 1. **Clone and Install Dependencies**
    ```bash
-   git clone https://github.com/KhBayazidAhmed/lets-create-a-ui-libreary
-   cd lets-create-a-ui-libreary
+   git clone https://github.com/KhBayazidAhmed/lets-create-a-ui-library
+   cd lets-create-a-ui-library
    bun install
    ```
 
