@@ -1,28 +1,33 @@
 # Use the official Bun runtime as a parent image
-FROM oven/bun:1 as base
+FROM oven/bun:1 AS base
 WORKDIR /app
 
-# Copy workspace root package.json
-COPY ../../package.json ./
-COPY ../../packages/ui-library/package.json ./packages/ui-library/
-COPY package.json bun.lockb* ./packages/ui-showcase/
+# Copy ui-library package files first
+COPY packages/ui-library/package.json ./packages/ui-library/package.json
+COPY packages/ui-library/tsconfig.json ./packages/ui-library/tsconfig.json
 
-# Install dependencies
+# Copy ui-showcase package files
+COPY packages/ui-showcase/package.json packages/ui-showcase/bun.lock* ./packages/ui-showcase/
+
+# Install dependencies for both packages
+WORKDIR /app/packages/ui-library
 RUN bun install --frozen-lockfile
 
-# Copy library source and build it
-COPY ../../packages/ui-library ./packages/ui-library
-RUN cd packages/ui-library && bun run build
-
-# Copy showcase source
-COPY . ./packages/ui-showcase
 WORKDIR /app/packages/ui-showcase
+RUN bun install --frozen-lockfile
 
-# Build the Next.js application
+# Copy and build ui-library
+WORKDIR /app/packages/ui-library
+COPY packages/ui-library/src ./src
+RUN bun run build
+
+# Copy ui-showcase source and build
+WORKDIR /app/packages/ui-showcase
+COPY packages/ui-showcase .
 RUN bun run build
 
 # Production stage
-FROM oven/bun:1 as production
+FROM base AS production
 WORKDIR /app
 
 # Copy built application

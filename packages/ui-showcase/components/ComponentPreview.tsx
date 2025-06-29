@@ -9,19 +9,19 @@ interface ComponentPreviewProps {
 
 const ComponentExamples = {
     button: () => (
-        <div className="space-x-2 space-y-2 flex flex-wrap items-center">
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button size="sm">Small</Button>
-            <Button size="lg">Large</Button>
-            <Button disabled>Disabled</Button>
+        <div className="space-x-2 space-y-2 flex flex-wrap items-center bg-gray-50 text-gray-500">
+            <Button variant="primary" className="bg-gray-50 text-gray-500">Primary</Button>
+            <Button variant="secondary" className="bg-gray-50 text-gray-500">Secondary</Button>
+            <Button variant="outline" className="bg-gray-50 text-gray-500">Outline</Button>
+            <Button variant="ghost" className="bg-gray-50 text-gray-500">Ghost</Button>
+            <Button size="sm" className="bg-gray-50 text-gray-500">Small</Button>
+            <Button size="lg" className="bg-gray-50 text-gray-500">Large</Button>
+            <Button disabled className="bg-gray-50 text-gray-500">Disabled</Button>
         </div>
     ),
 
     input: () => (
-        <div className="space-y-4 max-w-md">
+        <div className="space-y-4 max-w-md bg-gray-50 text-gray-500">
             <Input label="Email" placeholder="Enter your email" />
             <Input
                 label="Password"
@@ -39,7 +39,7 @@ const ComponentExamples = {
     ),
 
     card: () => (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl bg-gray-50 text-gray-500">
             <Card variant="bordered">
                 <CardHeader>
                     <h3 className="text-lg font-semibold">Bordered Card</h3>

@@ -1,0 +1,37 @@
+services:
+  ui-library:
+    build:
+      context: ./packages/ui-library
+      dockerfile: Dockerfile
+      target: base
+    container_name: ui-library-dev
+    volumes:
+      - ui-library-dist:/app/dist
+    environment:
+      - NODE_ENV=production
+    networks:
+      - ui-network
+
+  ui-showcase:
+    build:
+      context: .
+      dockerfile: ./packages/ui-showcase/Dockerfile
+    container_name: ui-showcase-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ui-library-dist:/app/packages/ui-library/dist
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - ui-library
+    networks:
+      - ui-network
+
+volumes:
+  ui-library-dist:
+    driver: local
+
+networks:
+  ui-network:
+    driver: bridge 

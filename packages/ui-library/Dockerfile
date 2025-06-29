@@ -1,5 +1,5 @@
 # Use the official Bun runtime as a parent image
-FROM oven/bun:1 as base
+FROM oven/bun:1 AS base
 WORKDIR /app
 
 # Copy package files
@@ -7,18 +7,14 @@ COPY package.json bun.lockb* ./
 RUN bun install --frozen-lockfile
 
 # Copy source code
-COPY . .
+COPY ./src ./src
+COPY ./tsconfig.json ./
 
 # Build the library
 RUN bun run build
 
-# Development stage
-FROM base as development
-EXPOSE 3001
-CMD ["bun", "run", "dev"]
-
 # Production stage - for publishing or serving built assets
-FROM oven/bun:1 as production
+FROM base AS production
 WORKDIR /app
 
 # Copy built library
@@ -30,3 +26,4 @@ RUN bun install --production --frozen-lockfile
 
 # Default to production
 FROM production 
+# End of Selection
